@@ -4,23 +4,38 @@ import {StyleSheet, View} from 'react-native';
 import {Navbar} from './src/components/Navbar';
 import {TodoScreen} from "./src/screens/TodoScreen";
 import {MainScreen} from "./src/screens/MainScreen";
+import {v1} from "react-native-uuid/dist/v1";
 
 export default function App() {
-    const [todo, setTodo] = useState([]);
     const [todoId, setTodoId] = useState(null)
+    const [todos, setTodos] = useState([
+        {id: v1(), title: 'React'},
+        {id: v1(), title: 'Redux'},
+        {id: v1(), title: 'JS'},
+        {id: v1(), title: 'Rest Api'},
+    ]);
+
 
     const addTodoItem = (title) => {
-        setTodo([{id: Date.now().toString(), title}, ...todo]);
+        setTodos([{id: v1(), title}, ...todos]);
     };
 
     const removeTodo = (todoId) => {
-        setTodo(todo.filter((todo) => todo.id !== todoId));
+        setTodos(todos.filter((todo) => todo.id !== todoId));
     };
 
-    let content = <MainScreen todo={todo} addTodoItem={addTodoItem} removeTodo={removeTodo}/>
+
+    let content = <MainScreen todos={todos}
+                              addTodoItem={addTodoItem}
+                              removeTodo={removeTodo}
+                              onScreen={setTodoId}
+    />
 
     if (todoId) {
-        content = <TodoScreen/>
+        let currentTodo = todos.find(todo => todo.id === todoId)
+        content = <TodoScreen goBack={() => setTodoId(null)}
+                              todo={currentTodo}
+        />
     }
 
     return (
