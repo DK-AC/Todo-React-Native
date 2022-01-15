@@ -24,5 +24,5 @@ export const MainScreen = ({todos, addTodoItem, removeTodo, onScreen}) => {
 const styles = StyleSheet.create({
     container: {
         padding: 20,
-    }, text: {},
+    },
 })

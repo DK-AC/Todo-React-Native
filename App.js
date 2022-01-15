@@ -43,7 +43,9 @@ export default function App() {
             <StatusBar style="light"/>
             <Navbar title="Todo App"/>
             {content}
-        </View>);
+        </View>
+    );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+});

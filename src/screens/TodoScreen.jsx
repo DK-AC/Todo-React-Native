@@ -6,7 +6,10 @@ export const TodoScreen = ({goBack, todo}) => {
     return (
         <View style={styles.container}>
             <Text>{todo.title}</Text>
-            <Button title={'Назад'} onPress={goBack}/>
+            <View style={styles.fixToText}>
+                <Button title={'Назад'} onPress={goBack}/>
+                <Button color={'red'} title={'удалить'} onPress={()=>{}}/>
+            </View>
         </View>
     );
 };
@@ -14,5 +17,9 @@ export const TodoScreen = ({goBack, todo}) => {
 const styles = StyleSheet.create({
     container: {
         padding: 20,
-    }, text: {},
+    },
+    fixToText:{
+        flexDirection:'row',
+        justifyContent: 'center',
+    }
 })
