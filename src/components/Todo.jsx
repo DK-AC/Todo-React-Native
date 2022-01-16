@@ -3,9 +3,13 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Theme} from "../variables/theme";
 
 export const Todo = ({todo, removeTodo, onScreen}) => {
+
+    const removeTodoHandler = () => removeTodo(todo.id)
+    const changeViewTodoScreenHandler = () => onScreen(todo.id)
+
     return (
-        <TouchableOpacity onLongPress={() => removeTodo(todo.id)}
-                          onPress={() => onScreen(todo.id)}
+        <TouchableOpacity onLongPress={removeTodoHandler}
+                          onPress={changeViewTodoScreenHandler}
         >
             <View style={styles.todo}>
                 <Text style={styles.item}>{todo.title}</Text>

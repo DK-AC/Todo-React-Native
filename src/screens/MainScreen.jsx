@@ -13,7 +13,10 @@ export const MainScreen = ({todos, addTodoItem, removeTodo, onScreen}) => {
                 keyExtractor={(item) => item.id}
                 data={todos}
                 renderItem={({item}) => (
-                    <Todo todo={item} removeTodo={removeTodo} onScreen={onScreen}/>
+                    <Todo todo={item}
+                          removeTodo={removeTodo}
+                          onScreen={onScreen}
+                    />
                 )}
             />
         </View>
@@ -21,8 +24,4 @@ export const MainScreen = ({todos, addTodoItem, removeTodo, onScreen}) => {
 };
 
 
-const styles = StyleSheet.create({
-    container: {
-        padding: 20,
-    },
-})
+const styles = StyleSheet.create({})

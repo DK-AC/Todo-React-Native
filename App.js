@@ -43,6 +43,14 @@ export default function App() {
         );
     };
 
+    const changeTitle = (id, title) => {
+        setTodos(todos.map(td => td.id === id
+            ? {...td, title: title}
+            : td)
+        )
+    }
+    const changeSetTodoId =() => setTodoId(null)
+
 
     let content = <MainScreen todos={todos}
                               addTodoItem={addTodoItem}
@@ -51,10 +59,13 @@ export default function App() {
     />
 
     if (todoId) {
+
         let currentTodo = todos.find(todo => todo.id === todoId)
-        content = <TodoScreen goBack={() => setTodoId(null)}
+
+        content = <TodoScreen goBack={changeSetTodoId}
                               removeTodo={removeTodo}
                               todo={currentTodo}
+                              changeTitle={changeTitle}
         />
     }
 
@@ -62,9 +73,15 @@ export default function App() {
         <View>
             <StatusBar style="light"/>
             <Navbar title="Todo App"/>
-            {content}
+            <View style={styles.container}>
+                {content}
+            </View>
         </View>
     );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    container: {
+        padding: 20,
+    },
+});

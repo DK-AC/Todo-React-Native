@@ -1,15 +1,29 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Button, StyleSheet, Text, View} from "react-native";
 import {Theme} from "../variables/theme";
 import {AppCard} from "../components/ui/AppCard";
+import {EditModal} from "../components/EditModal";
 
 
-export const TodoScreen = ({goBack, todo, removeTodo}) => {
+export const TodoScreen = ({goBack, todo, removeTodo, changeTitle}) => {
+    const [modal, setModal] = useState(false)
+
+    const changeTitleHandler = (title) => changeTitle(todo.id, title)
+    const changeSetModalHandler = () => setModal(true)
+    const removeTodoHandler = () => removeTodo(todo.id)
+
     return (
-        <View style={styles.container}>
+        <View>
+            <EditModal visible={modal}
+                       changeVisible={setModal}
+                       title={todo.title}
+                       changeTitle={changeTitleHandler}
+            />
             <AppCard style={styles.card}>
                 <Text style={styles.title}>{todo.title}</Text>
-                <Button title={'Ред.'}/>
+                <Button title={'Ред.'}
+                        onPress={changeSetModalHandler}
+                />
             </AppCard>
             <View style={styles.buttons}>
                 <View style={styles.button}>
@@ -21,7 +35,7 @@ export const TodoScreen = ({goBack, todo, removeTodo}) => {
                 <View style={styles.button}>
                     <Button color={Theme.Red_Color}
                             title={'удалить'}
-                            onPress={() => removeTodo(todo.id)}
+                            onPress={removeTodoHandler}
                     />
                 </View>
             </View>
@@ -30,9 +44,6 @@ export const TodoScreen = ({goBack, todo, removeTodo}) => {
 };
 
 const styles = StyleSheet.create({
-    container: {
-        padding: 20,
-    },
     buttons: {
         flexDirection: 'row',
         justifyContent: 'space-between',
