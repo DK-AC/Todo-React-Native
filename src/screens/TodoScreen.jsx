@@ -4,7 +4,7 @@ import {Theme} from "../variables/theme";
 import {AppCard} from "../components/ui/AppCard";
 
 
-export const TodoScreen = ({goBack, todo}) => {
+export const TodoScreen = ({goBack, todo, removeTodo}) => {
     return (
         <View style={styles.container}>
             <AppCard style={styles.card}>
@@ -21,7 +21,7 @@ export const TodoScreen = ({goBack, todo}) => {
                 <View style={styles.button}>
                     <Button color={Theme.Red_Color}
                             title={'удалить'}
-                            onPress={() => console.log('delete')}
+                            onPress={() => removeTodo(todo.id)}
                     />
                 </View>
             </View>
