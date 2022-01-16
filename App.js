@@ -49,7 +49,7 @@ export default function App() {
             : td)
         )
     }
-    const changeSetTodoId =() => setTodoId(null)
+    const changeSetTodoId = () => setTodoId(null)
 
 
     let content = <MainScreen todos={todos}
