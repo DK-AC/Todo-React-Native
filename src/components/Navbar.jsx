@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {Theme} from "../theme";
+import {Theme} from "../variables/theme";
 
 export const Navbar = ({title}) => {
     return (

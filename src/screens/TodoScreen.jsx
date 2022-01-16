@@ -1,12 +1,16 @@
 import React from 'react';
 import {Button, StyleSheet, Text, View} from "react-native";
-import {Theme} from "../theme";
+import {Theme} from "../variables/theme";
+import {AppCard} from "../components/ui/AppCard";
 
 
 export const TodoScreen = ({goBack, todo}) => {
     return (
         <View style={styles.container}>
-            <Text>{todo.title}</Text>
+            <AppCard style={styles.card}>
+                <Text style={styles.title}>{todo.title}</Text>
+                <Button title={'Ред.'}/>
+            </AppCard>
             <View style={styles.buttons}>
                 <View style={styles.button}>
                     <Button title={'Назад'}
@@ -35,5 +39,12 @@ const styles = StyleSheet.create({
     },
     button: {
         width: `40%`
+    },
+    card: {
+        marginBottom: 20,
+        padding: 15,
+    },
+    title: {
+        fontSize: 25,
     }
 })

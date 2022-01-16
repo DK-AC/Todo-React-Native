@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {Theme} from "../theme";
+import {Theme} from "../variables/theme";
 
 export const Todo = ({todo, removeTodo, onScreen}) => {
     return (
