@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Theme} from "../theme";
 
 export const Todo = ({todo, removeTodo, onScreen}) => {
     return (
@@ -16,7 +17,7 @@ export const Todo = ({todo, removeTodo, onScreen}) => {
 const styles = StyleSheet.create({
     todo: {
         marginTop: 10,
-        borderColor: '#3949ab',
+        borderColor: Theme.Main_Color,
         borderWidth: 1,
         borderRadius: 10,
         padding: 5,
