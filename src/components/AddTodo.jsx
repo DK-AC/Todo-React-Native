@@ -1,40 +1,46 @@
-import { useState } from 'react';
-import { View, StyleSheet, TextInput, Button, Alert } from 'react-native';
+import {useState} from 'react';
+import {Alert, StyleSheet, TextInput, View} from 'react-native';
+import {Ionicons} from '@expo/vector-icons';
 
-export const AddTodo = ({ addTodoItem }) => {
-  const [value, setValue] = useState('');
+export const AddTodo = ({addTodoItem}) => {
+    const [value, setValue] = useState('');
 
-  const onPressHandler = () => {
-    if (value.trim() !== '') {
-      addTodoItem(value.trim());
-      setValue('');
-    } else {
-      Alert.alert('Название дела не должно быть пустым');
-    }
-  };
+    const onPressHandler = () => {
+        if (value.trim() !== '') {
+            addTodoItem(value.trim());
+            setValue('');
+        } else {
+            Alert.alert('Название дела не должно быть пустым');
+        }
+    };
 
-  return (
-    <View style={styles.block}>
-      <TextInput
-        style={styles.input}
-        onChangeText={setValue}
-        value={value}
-        placeholder="Введите название дела"
-        autoCapitalize="none"
-        autoCorrect={false}
-      />
-      <Button title="Добавить" onPress={onPressHandler} />
-    </View>
-  );
+    return (
+        <View style={styles.block}>
+            <TextInput
+                style={styles.input}
+                onChangeText={setValue}
+                value={value}
+                placeholder="Введите название дела"
+                autoCapitalize="none"
+                autoCorrect={false}
+            />
+            <Ionicons.Button name="add-circle-outline"
+                             size={24} color="white"
+                             onPress={onPressHandler}
+            >
+                Добавить
+            </Ionicons.Button>
+        </View>
+    );
 };
 
 const styles = StyleSheet.create({
-  block: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  input: {
-    width: `70%`,
-    borderBottomWidth: 2,
-  },
+    block: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    input: {
+        width: `60%`,
+        borderBottomWidth: 2,
+    },
 });
