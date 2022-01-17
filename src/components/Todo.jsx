@@ -1,6 +1,7 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Theme} from "../variables/theme";
+import {AppTextBold} from "./ui/AppTextBold";
 
 export const Todo = ({todo, removeTodo, onScreen}) => {
 
@@ -12,7 +13,7 @@ export const Todo = ({todo, removeTodo, onScreen}) => {
                           onPress={changeViewTodoScreenHandler}
         >
             <View style={styles.todo}>
-                <Text style={styles.title}>{todo.title}</Text>
+                <AppTextBold>{todo.title}</AppTextBold>
             </View>
         </TouchableOpacity>
     );
@@ -26,7 +27,4 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         padding: 5,
     },
-    title: {
-        fontFamily: 'Roboto_Bold'
-    }
 });

@@ -3,6 +3,7 @@ import {Button, StyleSheet, Text, View} from "react-native";
 import {Theme} from "../variables/theme";
 import {AppCard} from "../components/ui/AppCard";
 import {EditModal} from "../components/EditModal";
+import {AppText} from "../components/ui/AppText";
 
 
 export const TodoScreen = ({goBack, todo, removeTodo, changeTitle}) => {
@@ -20,7 +21,7 @@ export const TodoScreen = ({goBack, todo, removeTodo, changeTitle}) => {
                        changeTitle={changeTitleHandler}
             />
             <AppCard style={styles.card}>
-                <Text style={styles.title}>{todo.title}</Text>
+                <AppText style={styles.title}>{todo.title}</AppText>
                 <Button title={'Ред.'}
                         onPress={changeSetModalHandler}
                 />
