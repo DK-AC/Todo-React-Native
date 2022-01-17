@@ -1,10 +1,11 @@
 import {StatusBar} from 'expo-status-bar';
 import {useState} from 'react';
-import {Alert, StyleSheet, View} from 'react-native';
+import {Alert, StyleSheet, Text, View} from 'react-native';
 import {Navbar} from './src/components/Navbar';
 import {TodoScreen} from "./src/screens/TodoScreen";
 import {MainScreen} from "./src/screens/MainScreen";
 import {v1} from "react-native-uuid/dist/v1";
+import {useFonts} from "expo-font"
 
 export default function App() {
     const [todoId, setTodoId] = useState(null)
@@ -14,6 +15,14 @@ export default function App() {
         {id: v1(), title: 'JS'},
         {id: v1(), title: 'Rest Api'},
     ]);
+    const [loaded] = useFonts({
+        Roboto_Regular: require('./assets/fonts/Roboto-Regular.ttf'),
+        Roboto_Bold: require('./assets/fonts/Roboto-Bold.ttf'),
+    })
+
+    if (!loaded) {
+        return null
+    }
 
 
     const addTodoItem = (title) => {
