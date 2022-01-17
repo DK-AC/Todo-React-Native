@@ -12,7 +12,7 @@ export const Todo = ({todo, removeTodo, onScreen}) => {
                           onPress={changeViewTodoScreenHandler}
         >
             <View style={styles.todo}>
-                <Text style={styles.item}>{todo.title}</Text>
+                <Text style={styles.title}>{todo.title}</Text>
             </View>
         </TouchableOpacity>
     );
@@ -26,4 +26,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         padding: 5,
     },
+    title: {
+        fontFamily: 'Roboto_Bold'
+    }
 });

@@ -1,11 +1,12 @@
 import {StatusBar} from 'expo-status-bar';
 import {useState} from 'react';
-import {Alert, StyleSheet, Text, View} from 'react-native';
+import {Alert, StyleSheet, View} from 'react-native';
 import {Navbar} from './src/components/Navbar';
 import {TodoScreen} from "./src/screens/TodoScreen";
 import {MainScreen} from "./src/screens/MainScreen";
 import {v1} from "react-native-uuid/dist/v1";
 import {useFonts} from "expo-font"
+import AppLoading from 'expo-app-loading';
 
 export default function App() {
     const [todoId, setTodoId] = useState(null)
@@ -19,9 +20,17 @@ export default function App() {
         Roboto_Regular: require('./assets/fonts/Roboto-Regular.ttf'),
         Roboto_Bold: require('./assets/fonts/Roboto-Bold.ttf'),
     })
+    const [isReady, setIsReady] = useState(false)
 
     if (!loaded) {
         return null
+    }
+
+    if (!isReady) {
+        return <AppLoading startAsync={loaded}
+                           onError={err => console.log(err)}
+                           onFinish={() => setIsReady(true)}
+        />
     }
 
 
@@ -51,7 +60,6 @@ export default function App() {
             ]
         );
     };
-
     const changeTitle = (id, title) => {
         setTodos(todos.map(td => td.id === id
             ? {...td, title: title}
