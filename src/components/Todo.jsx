@@ -22,7 +22,7 @@ export const Todo = ({todo, removeTodo, onScreen}) => {
 const styles = StyleSheet.create({
     todo: {
         marginTop: 10,
-        borderColor: Theme.Main_Color,
+        borderColor: Theme.MAIN_COLOR,
         borderWidth: 1,
         borderRadius: 10,
         padding: 5,

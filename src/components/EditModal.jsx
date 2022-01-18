@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import {Alert, Button, Modal, StyleSheet, TextInput, View} from "react-native";
+import {Alert, Modal, StyleSheet, TextInput, View} from "react-native";
 import {Theme} from "../variables/theme";
+import {AppButton} from "./ui/AppButton";
 
 export const EditModal = ({visible, changeVisible, title, changeTitle}) => {
 
@@ -31,13 +32,17 @@ export const EditModal = ({visible, changeVisible, title, changeTitle}) => {
                            onChangeText={setValue}
                 />
                 <View style={styles.buttons}>
-                    <Button color={Theme.Grey_Color}
-                            title={'Отменить'}
-                            onPress={changeVisibleModal}
-                    />
-                    <Button title={'Сохранить'}
-                            onPress={saveTitleHandler}
-                    />
+                    <AppButton color={Theme.GREY_COLOR}
+                               title={'Отменить'}
+                               onPress={changeVisibleModal}
+                    >
+                        Отменить
+                    </AppButton>
+                    <AppButton title={'Сохранить'}
+                               onPress={saveTitleHandler}
+                    >
+                        Сохранить
+                    </AppButton>
                 </View>
             </View>
         </Modal>)
@@ -56,7 +61,7 @@ const styles = StyleSheet.create({
     }, input: {
         padding: 10,
         borderRadius: 2,
-        borderBottomColor: Theme.Main_Color,
+        borderBottomColor: Theme.MAIN_COLOR,
         borderBottomWidth: 2,
         width: '80%'
     }

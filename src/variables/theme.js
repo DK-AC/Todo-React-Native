@@ -1,5 +1,5 @@
 export const Theme = {
-    Main_Color: '#3949ab',
-    Red_Color: '#FF0000',
-    Grey_Color: '#696969'
+    MAIN_COLOR: '#3949ab',
+    RED_COLOR: '#FF0000',
+    GREY_COLOR: '#696969'
 }

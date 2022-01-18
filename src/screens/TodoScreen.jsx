@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
-import {Button, StyleSheet, Text, View} from "react-native";
+import {StyleSheet, View} from "react-native";
 import {Theme} from "../variables/theme";
 import {AppCard} from "../components/ui/AppCard";
 import {EditModal} from "../components/EditModal";
 import {AppText} from "../components/ui/AppText";
+import {AppButton} from "../components/ui/AppButton";
+import { AntDesign } from '@expo/vector-icons';
 
 
 export const TodoScreen = ({goBack, todo, removeTodo, changeTitle}) => {
@@ -22,22 +24,26 @@ export const TodoScreen = ({goBack, todo, removeTodo, changeTitle}) => {
             />
             <AppCard style={styles.card}>
                 <AppText style={styles.title}>{todo.title}</AppText>
-                <Button title={'Ред.'}
-                        onPress={changeSetModalHandler}
-                />
+                <AppButton color={Theme.MAIN_COLOR}
+                           onPress={changeSetModalHandler}
+                >
+                    <AntDesign name="edit" size={24} color="white" />
+                </AppButton>
             </AppCard>
             <View style={styles.buttons}>
                 <View style={styles.button}>
-                    <Button title={'Назад'}
-                            onPress={goBack}
-                            color={Theme.Grey_Color}
-                    />
+                    <AppButton color={Theme.GREY_COLOR}
+                               onPress={goBack}
+                    >
+                        <AntDesign name="back" size={24} color="white" />
+                    </AppButton>
                 </View>
                 <View style={styles.button}>
-                    <Button color={Theme.Red_Color}
-                            title={'удалить'}
-                            onPress={removeTodoHandler}
-                    />
+                    <AppButton color={Theme.RED_COLOR}
+                               onPress={removeTodoHandler}
+                    >
+                        <AntDesign name="delete" size={24} color="white" />
+                    </AppButton>
                 </View>
             </View>
         </View>
