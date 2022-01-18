@@ -8,13 +8,15 @@ import {AppButton} from "../components/ui/AppButton";
 import {AntDesign} from '@expo/vector-icons';
 
 
-export const TodoScreen = ({goBack, todo, removeTodo, changeTitle}) => {
+export const TodoScreen = ({goBack, todo, removeTodo, updateTodoTitle}) => {
     const [modal, setModal] = useState(false)
 
 
-    const changeTitleHandler = (title) => changeTitle(todo.id, title)
+    const changeTitleHandler = (title) => updateTodoTitle(todo.id, title)
     const changeSetModalHandler = () => setModal(true)
-    const removeTodoHandler = () => removeTodo(todo.id)
+    const removeTodoHandler = () => {
+        removeTodo(todo.id)
+    }
 
     return (
         <View>

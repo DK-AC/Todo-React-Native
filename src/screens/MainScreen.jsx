@@ -5,7 +5,7 @@ import {Todo} from "../components/Todo";
 import {Theme} from "../variables/theme";
 
 
-export const MainScreen = ({todos, addTodoItem, removeTodo, onScreen}) => {
+export const MainScreen = ({todos, addTodo, removeTodo, onScreen}) => {
 
     const [deviceWidth, setDeviceWidth] = useState(
         Dimensions.get('window').width - Theme.PADDING_HORIZONTAL * 2)
@@ -41,7 +41,7 @@ export const MainScreen = ({todos, addTodoItem, removeTodo, onScreen}) => {
 
     return (
         <View>
-            <AddTodo addTodoItem={addTodoItem}/>
+            <AddTodo addTodoItem={addTodo}/>
             {content}
         </View>
     );
