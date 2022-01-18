@@ -11,12 +11,7 @@ import {Theme} from "./src/variables/theme";
 
 export default function App() {
     const [todoId, setTodoId] = useState(null)
-    const [todos, setTodos] = useState([
-        {id: v1(), title: 'React'},
-        {id: v1(), title: 'Redux'},
-        {id: v1(), title: 'JS'},
-        {id: v1(), title: 'Rest Api'},
-    ]);
+    const [todos, setTodos] = useState([]);
     const [loaded] = useFonts({
         Roboto_Regular: require('./assets/fonts/Roboto-Regular.ttf'),
         Roboto_Bold: require('./assets/fonts/Roboto-Bold.ttf'),
