@@ -1,15 +1,16 @@
 import React, {useState} from 'react';
-import {StyleSheet, View} from "react-native";
+import {Dimensions, StyleSheet, View} from "react-native";
 import {Theme} from "../variables/theme";
 import {AppCard} from "../components/ui/AppCard";
 import {EditModal} from "../components/EditModal";
 import {AppText} from "../components/ui/AppText";
 import {AppButton} from "../components/ui/AppButton";
-import { AntDesign } from '@expo/vector-icons';
+import {AntDesign} from '@expo/vector-icons';
 
 
 export const TodoScreen = ({goBack, todo, removeTodo, changeTitle}) => {
     const [modal, setModal] = useState(false)
+
 
     const changeTitleHandler = (title) => changeTitle(todo.id, title)
     const changeSetModalHandler = () => setModal(true)
@@ -27,7 +28,7 @@ export const TodoScreen = ({goBack, todo, removeTodo, changeTitle}) => {
                 <AppButton color={Theme.MAIN_COLOR}
                            onPress={changeSetModalHandler}
                 >
-                    <AntDesign name="edit" size={24} color="white" />
+                    <AntDesign name="edit" size={24} color="white"/>
                 </AppButton>
             </AppCard>
             <View style={styles.buttons}>
@@ -35,14 +36,14 @@ export const TodoScreen = ({goBack, todo, removeTodo, changeTitle}) => {
                     <AppButton color={Theme.GREY_COLOR}
                                onPress={goBack}
                     >
-                        <AntDesign name="back" size={24} color="white" />
+                        <AntDesign name="back" size={24} color="white"/>
                     </AppButton>
                 </View>
                 <View style={styles.button}>
                     <AppButton color={Theme.RED_COLOR}
                                onPress={removeTodoHandler}
                     >
-                        <AntDesign name="delete" size={24} color="white" />
+                        <AntDesign name="delete" size={24} color="white"/>
                     </AppButton>
                 </View>
             </View>
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     button: {
-        width: `40%`
+        width: Dimensions.get("window").width > 400 ? 150 : 100
     },
     card: {
         marginBottom: 20,
