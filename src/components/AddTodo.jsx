@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {Alert, StyleSheet, TextInput, View} from 'react-native';
+import {Alert, Keyboard, StyleSheet, TextInput, View} from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
 
 export const AddTodo = ({addTodoItem}) => {
@@ -9,6 +9,7 @@ export const AddTodo = ({addTodoItem}) => {
         if (value.trim() !== '') {
             addTodoItem(value.trim());
             setValue('');
+            Keyboard.dismiss()
         } else {
             Alert.alert('Название дела не должно быть пустым');
         }

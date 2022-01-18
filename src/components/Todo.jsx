@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Theme} from "../variables/theme";
-import {AppTextBold} from "./ui/AppTextBold";
+import {AppText} from "./ui/AppText";
 
 export const Todo = ({todo, removeTodo, onScreen}) => {
 
@@ -13,7 +13,7 @@ export const Todo = ({todo, removeTodo, onScreen}) => {
                           onPress={changeViewTodoScreenHandler}
         >
             <View style={styles.todo}>
-                <AppTextBold>{todo.title}</AppTextBold>
+                <AppText>{todo.title}</AppText>
             </View>
         </TouchableOpacity>
     );
