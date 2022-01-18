@@ -7,6 +7,7 @@ import {MainScreen} from "./src/screens/MainScreen";
 import {v1} from "react-native-uuid/dist/v1";
 import {useFonts} from "expo-font"
 import AppLoading from 'expo-app-loading';
+import {Theme} from "./src/variables/theme";
 
 export default function App() {
     const [todoId, setTodoId] = useState(null)
@@ -99,6 +100,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
     container: {
-        padding: 20,
+        paddingHorizontal: Theme.PADDING_HORIZONTAL,
+        paddingVertical: 20
     },
 });
