@@ -1,14 +1,20 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {AddTodo} from "../components/AddTodo";
 import {Dimensions, FlatList, Image, StyleSheet, View} from "react-native";
 import {Todo} from "../components/Todo";
 import {Theme} from "../variables/theme";
+import {ScreenContext} from "../context/screen/screenContext";
+import {TodoContext} from "../context/todo/todoContext";
 
 
-export const MainScreen = ({todos, addTodo, removeTodo, onScreen}) => {
+export const MainScreen = () => {
+
+    const {changeScreen} = useContext(ScreenContext)
+    const {todos, addTodo, removeTodo} = useContext(TodoContext)
 
     const [deviceWidth, setDeviceWidth] = useState(
         Dimensions.get('window').width - Theme.PADDING_HORIZONTAL * 2)
+
 
     useEffect(() => {
         const update = () => {
@@ -25,7 +31,7 @@ export const MainScreen = ({todos, addTodo, removeTodo, onScreen}) => {
                 data={todos}
                 renderItem={({item}) => <Todo todo={item}
                                               removeTodo={removeTodo}
-                                              onScreen={onScreen}/>
+                                              onScreen={changeScreen}/>
                 }
             />
         </View>)
