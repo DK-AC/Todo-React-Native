@@ -5,14 +5,14 @@ import {Theme} from "../../variables/theme";
 
 export const AppLoader = () => {
     return (
-        <View style={styles.loading}>
+        <View style={styles.center}>
             <ActivityIndicator size={'large'} color={Theme.MAIN_COLOR}/>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    loading: {
+    center: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'

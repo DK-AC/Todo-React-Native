@@ -13,6 +13,7 @@ import {
 import {TodoContext} from "./todoContext";
 import {ScreenContext} from "../screen/screenContext";
 import {Alert} from "react-native";
+import {url} from "../../types";
 
 const initialState = {
     todos: [],
@@ -25,7 +26,7 @@ export const TodoState = ({children}) => {
     const {changeScreen} = useContext(ScreenContext)
 
     const addTodo = async (title) => {
-        const response = await fetch(`https://react-native-todolist-ad112-default-rtdb.europe-west1.firebasedatabase.app/todos.json`, {
+        const response = await fetch(url, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({title}),
@@ -65,28 +66,35 @@ export const TodoState = ({children}) => {
     const hideLoader = () => dispatch(hideLoaderAC())
     const fetchTodos = async () => {
         showLoader()
-        const response = await fetch('https://react-native-todolist-ad112-default-rtdb.europe-west1.firebasedatabase.app/todos.json', {
-                method: 'GET',
-                headers: {'Content-Type': 'application/json'},
-            },
-        )
-        const data = await response.json()
-        const todos = Object.keys(data).map(key => ({...data[key], id: key}))
-        dispatch(fetchTodosAC(todos))
-        hideLoader()
+        hideError()
+        try {
+            const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {'Content-Type': 'application/json'},
+                },
+            )
+            const data = await response.json()
+            const todos = Object.keys(data).map(key => ({...data[key], id: key}))
+            dispatch(fetchTodosAC(todos))
+        } catch (e) {
+            showError('Что-то пошло не так...')
+        } finally {
+            hideLoader()
+        }
     }
 
 
     return (
-        <TodoContext.Provider value={{
-            todos: state.todos,
-            error: state.error,
-            loading: state.loading,
-            addTodo,
-            removeTodo,
-            updateTodoTitle,
-            fetchTodos
-        }}>
+        <TodoContext.Provider
+            value={{
+                todos: state.todos,
+                error: state.error,
+                loading: state.loading,
+                addTodo,
+                removeTodo,
+                updateTodoTitle,
+                fetchTodos
+            }}>
             {children}
         </TodoContext.Provider>)
 }

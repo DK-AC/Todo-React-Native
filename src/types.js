@@ -7,7 +7,7 @@ export const HIDE_LOADER = 'HIDE_LOADER'
 export const SHOW_ERROR = 'SHOW_ERROR'
 export const HIDE_ERROR = 'HIDE_ERROR'
 export const FETCH_TODOS = 'FETCH_TODOS'
-export const url = `https://react-native-todolist-ad112-default-rtdb.europe-west1.firebasedatabase.app/`
+export const url = `https://react-native-todolist-ad112-default-rtdb.europe-west1.firebasedatabase.app/todos.json`
 
 
 
