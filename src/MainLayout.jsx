@@ -55,9 +55,6 @@ export const MainLayout = () => {
 
     if (todoId) {
         const currentTodo = todos.find(td => td.id === todoId)
-        console.log('todos:', todos)
-        console.log('todoId:', todoId)
-        console.log('currentTodo:', currentTodo)
 
 
         content = <TodoScreen goBack={changeSetTodoId}
