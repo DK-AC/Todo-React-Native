@@ -64,6 +64,7 @@ export const TodoState = ({children}) => {
     const showLoader = () => dispatch(showLoaderAC())
     const hideLoader = () => dispatch(hideLoaderAC())
     const fetchTodos = async () => {
+        showLoader()
         const response = await fetch('https://react-native-todolist-ad112-default-rtdb.europe-west1.firebasedatabase.app/todos.json', {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'},
@@ -72,6 +73,7 @@ export const TodoState = ({children}) => {
         const data = await response.json()
         const todos = Object.keys(data).map(key => ({...data[key], id: key}))
         dispatch(fetchTodosAC(todos))
+        hideLoader()
     }
 
 

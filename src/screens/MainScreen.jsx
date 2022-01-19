@@ -5,6 +5,7 @@ import {Todo} from "../components/Todo";
 import {Theme} from "../variables/theme";
 import {ScreenContext} from "../context/screen/screenContext";
 import {TodoContext} from "../context/todo/todoContext";
+import {AppLoader} from "../components/ui/AppLoader";
 
 
 export const MainScreen = () => {
@@ -49,6 +50,11 @@ export const MainScreen = () => {
                        source={require('../../assets/no-items.png')}
                 />
             </View>)
+    }
+
+
+    if (loading) {
+        return <AppLoader />
     }
 
     return (
