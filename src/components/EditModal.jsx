@@ -18,7 +18,10 @@ export const EditModal = ({visible, changeVisible, title, changeTitle}) => {
         }
 
     }
-    const changeVisibleModal = () => changeVisible(false)
+    const changeVisibleModal = () => {
+        changeVisible(false)
+        setValue(title)
+    }
 
     return (
         <Modal visible={visible} animationType="slide" transparent={false}>
