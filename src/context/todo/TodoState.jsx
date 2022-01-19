@@ -24,7 +24,20 @@ export const TodoState = ({children}) => {
     const {changeScreen} = useContext(ScreenContext)
 
 
-    const addTodo = (title) => dispatch(addTodoAC(title))
+    const addTodo = async (title) => {
+        const response = await fetch(
+            'https://react-native-todolist-ad112-default-rtdb.europe-west1.firebasedatabase.app/todos.json', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({title}),
+            }
+        )
+        const data = await response.json()
+        console.log('data:', data.name)
+
+        dispatch(addTodoAC(data.name, title))
+
+    }
     const removeTodo = (todoId) => {
 
         const todo = state.todos.find(td => td.id === todoId)

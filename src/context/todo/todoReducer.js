@@ -1,5 +1,4 @@
 import {ADD_TODO, HIDE_ERROR, HIDE_LOADER, REMOVE_TODO, SHOW_ERROR, SHOW_LOADER, UPDATE_TODO_TITLE} from "../../types";
-import {v1} from "react-native-uuid/dist/v1";
 
 export const todoReducer = (state, action) => {
     switch (action.type) {
@@ -12,7 +11,7 @@ export const todoReducer = (state, action) => {
             return {
                 ...state,
                 todos: [
-                    {id: v1(), title: action.title}, ...state.todos]
+                    {id: action.id, title: action.title}, ...state.todos]
             }
         case UPDATE_TODO_TITLE:
             return {
@@ -51,8 +50,8 @@ export const removeTodoAC = (todoId) => {
     return {type: REMOVE_TODO, todoId}
 }
 
-export const addTodoAC = (title) => {
-    return {type: ADD_TODO, title}
+export const addTodoAC = (id, title) => {
+    return {type: ADD_TODO, id, title}
 }
 
 export const updateTodoTitleAC = (todoId, title) => {

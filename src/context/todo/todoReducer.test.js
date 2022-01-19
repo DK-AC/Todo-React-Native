@@ -1,7 +1,8 @@
 import React from 'react';
 import {
     addTodoAC,
-    hideErrorAC, hideLoaderAC,
+    hideErrorAC,
+    hideLoaderAC,
     removeTodoAC,
     showErrorAC,
     showLoaderAC,
@@ -23,7 +24,7 @@ beforeEach(() => {
         error: false
     }
 })
-describe('todoReducer tests',()=>{
+describe('todoReducer tests', () => {
 
     test('correct todo should be removed', () => {
         let endState = todoReducer(state, removeTodoAC('3'))
@@ -35,7 +36,7 @@ describe('todoReducer tests',()=>{
 
 
     test('correct todo should be add with title', () => {
-        let endState = todoReducer(state, addTodoAC('New Todo'))
+        let endState = todoReducer(state, addTodoAC('New Id', 'New Title'))
 
         expect(state.todos.length).toBe(4)
         expect(endState.todos.length).toBe(5)
@@ -45,7 +46,8 @@ describe('todoReducer tests',()=>{
             {id: '3', title: 'JS'},
             {id: '4', title: 'Rest Api'},
         ])
-        expect(endState.todos[0].title).toBe('New Todo')
+        expect(endState.todos[0].title).toBe('New Title')
+        expect(endState.todos[0].id).toBe('New Id')
     })
 
 
