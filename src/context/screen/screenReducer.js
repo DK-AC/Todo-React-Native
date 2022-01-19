@@ -1,13 +1,20 @@
 import {CHANGE_SCREEN} from "../../types";
 
 export const screenReducer = (state, action) => {
-    return state
+    switch (action.type) {
+        case CHANGE_SCREEN:
+            return action.todoId
+
+        default :
+            return state
+    }
+
 }
 
 
-export const changeScreenAC = (id) => {
+export const changeScreenAC = (todoId) => {
     return {
         type: CHANGE_SCREEN,
-        id
+        todoId
     }
 }
