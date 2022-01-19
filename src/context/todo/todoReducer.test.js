@@ -1,6 +1,7 @@
 import React from 'react';
 import {
     addTodoAC,
+    fetchTodosAC,
     hideErrorAC,
     hideLoaderAC,
     removeTodoAC,
@@ -94,6 +95,23 @@ describe('todoReducer tests', () => {
 
         expect(state.loading).toBeFalsy()
         expect(endState.loading).toBeFalsy()
+    })
+
+    test('todos should be added', () => {
+        let endState = todoReducer(state, fetchTodosAC([
+            {id: '5', title: 'GraphQL'},
+            {id: '6', title: 'Material UI'},
+        ]))
+
+        expect(state.todos).toEqual([
+            {id: '1', title: 'React'},
+            {id: '2', title: 'Redux'},
+            {id: '3', title: 'JS'},
+            {id: '4', title: 'Rest Api'}])
+        expect(endState.todos).toEqual([
+            {id: '5', title: 'GraphQL'},
+            {id: '6', title: 'Material UI'}
+        ])
     })
 })
 

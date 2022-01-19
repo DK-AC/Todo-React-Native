@@ -1,6 +1,7 @@
 import React, {useContext, useReducer} from "react";
 import {
     addTodoAC,
+    fetchTodosAC,
     hideErrorAC,
     hideLoaderAC,
     removeTodoAC,
@@ -12,7 +13,6 @@ import {
 import {TodoContext} from "./todoContext";
 import {ScreenContext} from "../screen/screenContext";
 import {Alert} from "react-native";
-import {url} from "../../types";
 
 const initialState = {
     todos: [],
@@ -23,8 +23,6 @@ const initialState = {
 export const TodoState = ({children}) => {
     const [state, dispatch] = useReducer(todoReducer, initialState)
     const {changeScreen} = useContext(ScreenContext)
-
-        // ` ${url}todos.json`
 
     const addTodo = async (title) => {
         const response = await fetch(`https://react-native-todolist-ad112-default-rtdb.europe-west1.firebasedatabase.app/todos.json`, {
@@ -65,14 +63,27 @@ export const TodoState = ({children}) => {
     const hideError = () => dispatch(hideErrorAC())
     const showLoader = () => dispatch(showLoaderAC())
     const hideLoader = () => dispatch(hideLoaderAC())
+    const fetchTodos = async () => {
+        const response = await fetch('https://react-native-todolist-ad112-default-rtdb.europe-west1.firebasedatabase.app/todos.json', {
+                method: 'GET',
+                headers: {'Content-Type': 'application/json'},
+            },
+        )
+        const data = await response.json()
+        const todos = Object.keys(data).map(key => ({...data[key], id: key}))
+        dispatch(fetchTodosAC(todos))
+    }
 
 
     return (
         <TodoContext.Provider value={{
             todos: state.todos,
+            error: state.error,
+            loading: state.loading,
             addTodo,
             removeTodo,
-            updateTodoTitle
+            updateTodoTitle,
+            fetchTodos
         }}>
             {children}
         </TodoContext.Provider>)

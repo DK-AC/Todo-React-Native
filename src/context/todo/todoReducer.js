@@ -1,4 +1,13 @@
-import {ADD_TODO, HIDE_ERROR, HIDE_LOADER, REMOVE_TODO, SHOW_ERROR, SHOW_LOADER, UPDATE_TODO_TITLE} from "../../types";
+import {
+    ADD_TODO,
+    FETCH_TODOS,
+    HIDE_ERROR,
+    HIDE_LOADER,
+    REMOVE_TODO,
+    SHOW_ERROR,
+    SHOW_LOADER,
+    UPDATE_TODO_TITLE
+} from "../../types";
 
 export const todoReducer = (state, action) => {
     switch (action.type) {
@@ -28,6 +37,8 @@ export const todoReducer = (state, action) => {
             return {...state, loading: true}
         case HIDE_LOADER:
             return {...state, loading: false}
+        case FETCH_TODOS:
+            return {...state, todos: action.todos}
         default:
             return state
     }
@@ -60,5 +71,9 @@ export const showLoaderAC = () => {
 
 export const hideLoaderAC = () => {
     return {type: HIDE_LOADER}
+}
+
+export const fetchTodosAC = (todos) => {
+    return {type: FETCH_TODOS, todos}
 }
 
