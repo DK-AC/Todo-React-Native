@@ -45,7 +45,7 @@ test('correct title should be changed', () => {
     expect(state.todos[0].title).toBe('React')
     expect(endState.todos[0].title).toBe('Update title')
     expect(state.todos.length).toBe(4)
-    expect(endState.todos.length).toBe(3)
+    expect(endState.todos.length).toBe(4)
     expect(endState.todos).toEqual([
         {id: '1', title: 'Update title'},
         {id: '2', title: 'Redux'},

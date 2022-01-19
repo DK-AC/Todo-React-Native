@@ -47,7 +47,6 @@ export const MainLayout = () => {
     />
 
     if (todoId) {
-        console.log(todoId)
         const currentTodo = todos.find(td => td.id === todoId)
 
         content = <TodoScreen goBack={changeSetTodoId}
