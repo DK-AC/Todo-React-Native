@@ -1,4 +1,4 @@
-import {ADD_TODO, REMOVE_TODO, UPDATE_TODO_TITLE} from "../../types";
+import {ADD_TODO, HIDE_ERROR, HIDE_LOADER, REMOVE_TODO, SHOW_ERROR, SHOW_LOADER, UPDATE_TODO_TITLE} from "../../types";
 import {v1} from "react-native-uuid/dist/v1";
 
 export const todoReducer = (state, action) => {
@@ -21,6 +21,26 @@ export const todoReducer = (state, action) => {
                     ? {...td, title: action.title}
                     : td)
             }
+        case SHOW_ERROR:
+            return {
+                ...state,
+                error: action.error
+            }
+        case HIDE_ERROR:
+            return {
+                ...state,
+                error: false
+            }
+        case SHOW_LOADER:
+            return {
+                ...state,
+                loading: true
+            }
+        case HIDE_LOADER:
+            return {
+                ...state,
+                loading: false
+            }
         default:
             return state
     }
@@ -28,23 +48,30 @@ export const todoReducer = (state, action) => {
 
 
 export const removeTodoAC = (todoId) => {
-    return {
-        type: REMOVE_TODO,
-        todoId
-    }
+    return {type: REMOVE_TODO, todoId}
 }
 
 export const addTodoAC = (title) => {
-    return {
-        type: ADD_TODO,
-        title
-    }
+    return {type: ADD_TODO, title}
 }
 
 export const updateTodoTitleAC = (todoId, title) => {
-    return {
-        type: UPDATE_TODO_TITLE,
-        todoId,
-        title
-    }
+    return {type: UPDATE_TODO_TITLE, todoId, title}
 }
+
+export const showErrorAC = (error) => {
+    return {type: SHOW_ERROR, error}
+}
+
+export const hideErrorAC = () => {
+    return {type: HIDE_ERROR}
+}
+
+export const showLoaderAC = () => {
+    return {type: SHOW_LOADER}
+}
+
+export const hideLoaderAC = () => {
+    return {type: HIDE_LOADER}
+}
+

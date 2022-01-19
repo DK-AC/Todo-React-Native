@@ -1,17 +1,22 @@
 import React, {useContext, useReducer} from "react";
-import {addTodoAC, removeTodoAC, todoReducer, updateTodoTitleAC} from "./todoReducer";
+import {
+    addTodoAC,
+    hideErrorAC,
+    hideLoaderAC,
+    removeTodoAC,
+    showErrorAC,
+    showLoaderAC,
+    todoReducer,
+    updateTodoTitleAC
+} from "./todoReducer";
 import {TodoContext} from "./todoContext";
-import {v1} from "react-native-uuid/dist/v1";
 import {ScreenContext} from "../screen/screenContext";
 import {Alert} from "react-native";
 
 const initialState = {
-    todos: [
-        {id: v1(), title: 'React'},
-        {id: v1(), title: 'Redux'},
-        {id: v1(), title: 'JS'},
-        {id: v1(), title: 'Rest Api'},
-    ]
+    todos: [],
+    loading: false,
+    error: false
 }
 
 export const TodoState = ({children}) => {
@@ -19,9 +24,7 @@ export const TodoState = ({children}) => {
     const {changeScreen} = useContext(ScreenContext)
 
 
-    const addTodo = (title) => {
-        dispatch(addTodoAC(title))
-    };
+    const addTodo = (title) => dispatch(addTodoAC(title))
     const removeTodo = (todoId) => {
 
         const todo = state.todos.find(td => td.id === todoId)
@@ -46,9 +49,12 @@ export const TodoState = ({children}) => {
         );
 
     }
-    const updateTodoTitle = (todoId, title) => {
-        dispatch(updateTodoTitleAC(todoId, title))
-    }
+    const updateTodoTitle = (todoId, title) => dispatch(updateTodoTitleAC(todoId, title))
+    const showError = (error) => dispatch(showErrorAC(error))
+    const hideError = () => dispatch(hideErrorAC())
+    const showLoader = () => dispatch(showLoaderAC())
+    const hideLoader = () => dispatch(hideLoaderAC())
+
 
     return (
         <TodoContext.Provider value={{
