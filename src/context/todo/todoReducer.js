@@ -21,25 +21,13 @@ export const todoReducer = (state, action) => {
                     : td)
             }
         case SHOW_ERROR:
-            return {
-                ...state,
-                error: action.error
-            }
+            return {...state, error: action.error}
         case HIDE_ERROR:
-            return {
-                ...state,
-                error: false
-            }
+            return {...state, error: false}
         case SHOW_LOADER:
-            return {
-                ...state,
-                loading: true
-            }
+            return {...state, loading: true}
         case HIDE_LOADER:
-            return {
-                ...state,
-                loading: false
-            }
+            return {...state, loading: false}
         default:
             return state
     }
