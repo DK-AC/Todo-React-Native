@@ -71,7 +71,7 @@ export const TodoState = ({children}) => {
         showLoader()
         hideError()
         try {
-            const response = await fetch(`${url}todos.json`, {
+            const response = await fetch(`${url}.json`, {
                     method: 'GET',
                     headers: {'Content-Type': 'application/json'},
                 },
