@@ -32,9 +32,7 @@ export const MainScreen = () => {
         return () => Dimensions.removeEventListener('change', () => update)
     })
 
-    if (loading) {
-        return <AppLoader/>
-    }
+
 
     let content = (
         <View style={{width: deviceWidth}}>
@@ -57,14 +55,17 @@ export const MainScreen = () => {
             </View>)
     }
 
-    if (error) {
-        return (
-            <View style={styles.center}>
-                <AppText style={styles.error}>{error}</AppText>
-                <AppButton onPress={loadTodos}>Повторить</AppButton>
-            </View>
-        )
-    }
+    // if (error) {
+    //     return (
+    //         <View style={styles.center}>
+    //             <AppText style={styles.error}>{error}</AppText>
+    //             <AppButton onPress={loadTodos}>Повторить</AppButton>
+    //         </View>
+    //     )
+    // }
+    // if (loading) {
+    //     return <AppLoader/>
+    // }
 
     return (
         <View>
@@ -96,6 +97,6 @@ const styles = StyleSheet.create({
     error: {
         color: Theme.RED_COLOR,
         marginBottom: 20,
-        fontSize: 20
+        fontSize:20
     }
 })

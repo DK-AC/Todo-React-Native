@@ -29,7 +29,7 @@ export const TodoState = ({children}) => {
 
 
     const addTodo = async (title) => {
-        const response = await fetch(`${url}todos.json`, {
+        const response = await fetch(`${url}.json`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({title}),
@@ -55,7 +55,7 @@ export const TodoState = ({children}) => {
                     error: "Удалить",
                     onPress: async () => {
                         changeScreen(null)
-                        await fetch(`${url}todos:${todoId}.json`, {
+                        await fetch(`${url}/${todoId}.json`, {
                             method: 'DELETE',
                             headers: {'Content-Type': 'application/json'},
                         })
@@ -89,7 +89,7 @@ export const TodoState = ({children}) => {
     const updateTodoTitle = async (todoId, title) => {
         hideError()
         try {
-            await fetch(`${url}todos${todoId}.json`, {
+            await fetch(`${url}/${todoId}.json`, {
                 method: 'PATCH',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({title}),
