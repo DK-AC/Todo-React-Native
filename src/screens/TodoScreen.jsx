@@ -17,16 +17,19 @@ export const TodoScreen = () => {
     const {todos, removeTodo, updateTodoTitle} = useContext(TodoContext)
 
     const todo = todos.find(td => td.id === todoId)
-    const changeTitleHandler = (title) => updateTodoTitle(todo.id, title)
+    const changeTitleHandler = (title) => {
+        updateTodoTitle(todo.id, title)
+    }
     const changeSetModalHandler = () => setModal(true)
-    const removeTodoHandler = () => {
-        removeTodo(todo.id)
+    const removeTodoHandler = async () => {
+        await removeTodo(todo.id)
+        setModal(false)
     }
 
     return (
         <View>
             <EditModal visible={modal}
-                       changeVisible={setModal}
+                       changeVisible={()=>setModal(false)}
                        title={todo.title}
                        changeTitle={changeTitleHandler}
             />
@@ -41,7 +44,7 @@ export const TodoScreen = () => {
             <View style={styles.buttons}>
                 <View style={styles.button}>
                     <AppButton color={Theme.GREY_COLOR}
-                               onPress={()=>changeScreen(null)}
+                               onPress={() => changeScreen(null)}
                     >
                         <AntDesign name="back" size={24} color="white"/>
                     </AppButton>

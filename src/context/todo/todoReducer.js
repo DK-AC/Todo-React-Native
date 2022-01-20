@@ -20,7 +20,7 @@ export const todoReducer = (state, action) => {
             return {
                 ...state,
                 todos: [
-                    {id: action.id, title: action.title}, ...state.todos]
+                    ...state.todos, {id: action.id, title: action.title},]
             }
         case UPDATE_TODO_TITLE:
             return {
@@ -32,7 +32,7 @@ export const todoReducer = (state, action) => {
         case SHOW_ERROR:
             return {...state, error: action.error}
         case HIDE_ERROR:
-            return {...state, error: false}
+            return {...state, error: null}
         case SHOW_LOADER:
             return {...state, loading: true}
         case HIDE_LOADER:

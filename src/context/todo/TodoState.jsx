@@ -15,18 +15,21 @@ import {ScreenContext} from "../screen/screenContext";
 import {Alert} from "react-native";
 import {url} from "../../types";
 
-const initialState = {
-    todos: [],
-    loading: false,
-    error: false
-}
 
 export const TodoState = ({children}) => {
+
+    const initialState = {
+        todos: [],
+        loading: false,
+        error: null
+    }
+
     const [state, dispatch] = useReducer(todoReducer, initialState)
     const {changeScreen} = useContext(ScreenContext)
 
+
     const addTodo = async (title) => {
-        const response = await fetch(url, {
+        const response = await fetch(`${url}todos.json`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({title}),
@@ -44,31 +47,31 @@ export const TodoState = ({children}) => {
             `Вы действительно хотите удалить ${todo.title}?`,
             [
                 {
-                    text: "Отмена",
+                    error: "Отмена",
                     onPress: () => console.log("Cancel Pressed"),
                     style: "cancel"
                 },
                 {
-                    text: "Удалить",
-                    onPress: () => {
+                    error: "Удалить",
+                    onPress: async () => {
                         changeScreen(null)
+                        await fetch(`${url}todos:${todoId}.json`, {
+                            method: 'DELETE',
+                            headers: {'Content-Type': 'application/json'},
+                        })
                         dispatch(removeTodoAC(todoId))
                     }
                 }
-            ]
+            ],
+            {cancelable: false}
         );
-
     }
-    const updateTodoTitle = (todoId, title) => dispatch(updateTodoTitleAC(todoId, title))
-    const showError = (error) => dispatch(showErrorAC(error))
-    const hideError = () => dispatch(hideErrorAC())
-    const showLoader = () => dispatch(showLoaderAC())
-    const hideLoader = () => dispatch(hideLoaderAC())
+
     const fetchTodos = async () => {
         showLoader()
         hideError()
         try {
-            const response = await fetch(url, {
+            const response = await fetch(`${url}todos.json`, {
                     method: 'GET',
                     headers: {'Content-Type': 'application/json'},
                 },
@@ -83,6 +86,24 @@ export const TodoState = ({children}) => {
         }
     }
 
+    const updateTodoTitle = async (todoId, title) => {
+        hideError()
+        try {
+            await fetch(`${url}todos${todoId}.json`, {
+                method: 'PATCH',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({title}),
+            })
+            dispatch(updateTodoTitleAC(todoId, title))
+        } catch (e) {
+            showError('Что-то пошло не так...')
+        }
+    }
+    const showError = (error) => dispatch(showErrorAC(error))
+    const hideError = () => dispatch(hideErrorAC())
+    const showLoader = () => dispatch(showLoaderAC())
+    const hideLoader = () => dispatch(hideLoaderAC())
+
 
     return (
         <TodoContext.Provider
@@ -94,7 +115,8 @@ export const TodoState = ({children}) => {
                 removeTodo,
                 updateTodoTitle,
                 fetchTodos
-            }}>
+            }}
+        >
             {children}
         </TodoContext.Provider>)
 }
