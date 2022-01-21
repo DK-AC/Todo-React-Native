@@ -32,7 +32,7 @@ export const TodoState = ({children}) => {
     const addTodo = async (title) => {
         hideError()
         try {
-            const data = await Http.post(`${url}.json`,{title})
+            const data = await Http.post(`${url}.json`, {title})
             dispatch(addTodoAC(data.name, title))
         } catch (e) {
             showError('Что-то пошло не так')

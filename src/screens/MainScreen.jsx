@@ -32,6 +32,18 @@ export const MainScreen = () => {
         return () => Dimensions.removeEventListener('change', () => update)
     })
 
+    if (loading) {
+        return <AppLoader/>
+    }
+
+    if (error) {
+        return (
+            <View style={styles.center}>
+                <AppText style={styles.error}>{error}</AppText>
+                <AppButton onPress={loadTodos}>Повторить</AppButton>
+            </View>
+        )
+    }
 
     let content = (
         <View style={{width: deviceWidth}}>
@@ -54,17 +66,6 @@ export const MainScreen = () => {
             </View>)
     }
 
-    if (error) {
-        return (
-            <View style={styles.center}>
-                <AppText style={styles.error}>{error}</AppText>
-                <AppButton onPress={loadTodos}>Повторить</AppButton>
-            </View>
-        )
-    }
-    if (loading) {
-        return <AppLoader/>
-    }
 
     return (
         <View>

@@ -29,7 +29,7 @@ export const TodoScreen = () => {
     return (
         <View>
             <EditModal visible={modal}
-                       changeVisible={()=>setModal(false)}
+                       changeVisible={() => setModal(false)}
                        title={todo.title}
                        changeTitle={changeTitleHandler}
             />
