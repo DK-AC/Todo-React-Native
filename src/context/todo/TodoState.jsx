@@ -14,6 +14,7 @@ import {TodoContext} from "./todoContext";
 import {ScreenContext} from "../screen/screenContext";
 import {Alert} from "react-native";
 import {url} from "../../types";
+import {Http} from "../../http";
 
 
 export const TodoState = ({children}) => {
@@ -29,14 +30,14 @@ export const TodoState = ({children}) => {
 
 
     const addTodo = async (title) => {
-        const response = await fetch(`${url}.json`, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({title}),
-            }
-        )
-        const data = await response.json()
-        dispatch(addTodoAC(data.name, title))
+        hideError()
+        try {
+            const data = await Http.post(`${url}.json`,{title})
+            dispatch(addTodoAC(data.name, title))
+        } catch (e) {
+            showError('Что-то пошло не так')
+        }
+        console.log({title})
     }
     const removeTodo = (todoId) => {
 
@@ -55,10 +56,7 @@ export const TodoState = ({children}) => {
                     error: "Удалить",
                     onPress: async () => {
                         changeScreen(null)
-                        await fetch(`${url}/${todoId}.json`, {
-                            method: 'DELETE',
-                            headers: {'Content-Type': 'application/json'},
-                        })
+                        await Http.delete(`${url}/${todoId}.json`)
                         dispatch(removeTodoAC(todoId))
                     }
                 }
@@ -71,12 +69,7 @@ export const TodoState = ({children}) => {
         showLoader()
         hideError()
         try {
-            const response = await fetch(`${url}.json`, {
-                    method: 'GET',
-                    headers: {'Content-Type': 'application/json'},
-                },
-            )
-            const data = await response.json()
+            const data = await Http.get(`${url}.json`)
             const todos = Object.keys(data).map(key => ({...data[key], id: key}))
             dispatch(fetchTodosAC(todos))
         } catch (e) {
@@ -89,11 +82,7 @@ export const TodoState = ({children}) => {
     const updateTodoTitle = async (todoId, title) => {
         hideError()
         try {
-            await fetch(`${url}/${todoId}.json`, {
-                method: 'PATCH',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({title}),
-            })
+            await Http.patch(`${url}/${todoId}.json`, {title})
             dispatch(updateTodoTitleAC(todoId, title))
         } catch (e) {
             showError('Что-то пошло не так...')

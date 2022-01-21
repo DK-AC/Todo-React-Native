@@ -3,15 +3,15 @@ export class Http {
 
     static async get(url) {
         try {
-            return request(url, 'GET')
+            return await request(url, 'GET')
         } catch (e) {
-            console.log(e)
+            throw e
         }
     }
 
     static async post(url, data = {}) {
         try {
-            return request(url, 'POST', data)
+            return await request(url, 'POST', data)
         } catch (e) {
             console.log(e)
         }
@@ -20,8 +20,7 @@ export class Http {
 
     static async delete(url) {
         try {
-            return request(url, 'DELETE')
-
+            return await request(url, 'DELETE')
         } catch (e) {
             console.log(e)
         }
@@ -29,11 +28,10 @@ export class Http {
 
     static async patch(url, data = {}) {
         try {
-            return request(url, 'PATCH', data)
+            return await request(url, 'PATCH', data)
         } catch (e) {
             console.log(e)
         }
-
     }
 }
 
@@ -43,7 +41,7 @@ async function request(url, method = 'GET', data) {
         headers: Http.HEADERS
     }
 
-    if (method === 'POST' || method === 'GET', data) {
+    if (method === 'POST' || method === 'PATCH') {
         config.body = JSON.stringify(data)
     }
 
