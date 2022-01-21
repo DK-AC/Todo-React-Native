@@ -47,8 +47,8 @@ describe('todoReducer tests', () => {
             {id: '3', title: 'JS'},
             {id: '4', title: 'Rest Api'},
         ])
-        expect(endState.todos[0].title).toBe('New Title')
-        expect(endState.todos[0].id).toBe('New Id')
+        expect(endState.todos[4].title).toBe('New Title')
+        expect(endState.todos[4].id).toBe('New Id')
     })
 
 
